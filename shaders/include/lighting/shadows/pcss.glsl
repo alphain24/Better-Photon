@@ -3,6 +3,7 @@
 
 #if defined SHADOW && (defined WORLD_OVERWORLD || defined WORLD_END)
 
+#include "/include/lighting/night.glsl"
 #include "/include/lighting/shadows/common.glsl"
 #include "/include/lighting/shadows/distortion.glsl"
 #include "/include/utility/color.glsl"
@@ -256,6 +257,11 @@ vec3 get_filtered_shadows(
 
     // Increase blur radius to approximate subsurface scattering
     penumbra_size *= 1.0 + 7.0 * sss_amount;
+#endif
+
+#if defined WORLD_OVERWORLD
+    // Softer shadows from moonlight
+    penumbra_size *= mix(1.0, NIGHT_SHADOW_SOFTNESS, get_night_factor());
 #endif
 
 #ifdef SHADOW_COLOR

@@ -243,9 +243,11 @@ void main() {
 
     // Aurora
 
-    float aurora_distance;
-    vec3 aurora
-        = draw_aurora(ray_dir, dither, distance_to_terrain, aurora_distance);
+    // Skip the aurora where it is completely hidden behind clouds
+    float aurora_distance = 1e6;
+    vec3 aurora = clouds.w > 0.01
+        ? draw_aurora(ray_dir, dither, distance_to_terrain, aurora_distance)
+        : vec3(0.0);
     clouds.xyz += aurora * clouds.w;
 
     // Let visible aurora in front of the clouds/terrain set the apparent

@@ -158,6 +158,10 @@ option.PIXELATED_SHADOWS.comment       = Shadows snap to block texels, creating 
 option.PIXELATED_SHADOWS_RESOLUTION    = Pixelated Shadows Resolution
 option.SSS_STEPS                       = SSS Steps 
 option.SSS_STEPS.comment               = Increase to reduce noise on foliage and other materials with SSS, at the cost of performance.
+option.NIGHT_SHADOW_SOFTNESS           = Night Shadow Softness
+option.NIGHT_SHADOW_SOFTNESS.comment   = How much softer moonlight shadows are than sunlight shadows. 1.00 = same as daytime
+option.NIGHT_SHADOW_FILL               = Night Shadow Fill
+option.NIGHT_SHADOW_FILL.comment       = Lets some moonlight into shadowed areas at night, so that shadows are less harsh than during the day. 0.00 = same as daytime
 
 option.SHADER_AO                       = Shader AO
 option.SHADER_AO.comment               = AO method used. Off - no shader AO. SSAO - lower quality but requires fewer samples/less filtering. GTAO - better quality but requires more samples/filtering

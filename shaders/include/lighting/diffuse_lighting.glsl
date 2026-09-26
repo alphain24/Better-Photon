@@ -3,6 +3,7 @@
 
 #include "/include/lighting/bsdf.glsl"
 #include "/include/lighting/colors/blocklight_color.glsl"
+#include "/include/lighting/night.glsl"
 #include "/include/misc/end_lighting_fix.glsl"
 #include "/include/surface/material.glsl"
 #include "/include/utility/fast_math.glsl"
@@ -288,12 +289,22 @@ vec3 get_diffuse_lighting(
     diffuse *= sqr(ao);
 #endif
 
+#if defined WORLD_OVERWORLD
+    // At night, let some moonlight into shadowed areas to reduce the contrast
+    // between lit and shadowed surfaces
+    vec3 diffuse_shadows
+        = mix(shadows, vec3(1.0), NIGHT_SHADOW_FILL * get_night_factor());
+#else
+    vec3 diffuse_shadows = shadows;
+#endif
+
 #ifdef SHADOW_VPS
     // Add SSS and diffuse
-    lighting += diffuse * shadows + bounced + sss;
+    lighting += diffuse * diffuse_shadows + bounced + sss;
 #else
     // Blend SSS and diffuse
-    lighting += mix(diffuse, sss, material.sss_amount) * shadows + bounced;
+    lighting += diffuse * (1.0 - material.sss_amount) * diffuse_shadows
+        + sss * material.sss_amount * shadows + bounced;
 #endif
 #else
     // Simple shading for when shadows are disabled

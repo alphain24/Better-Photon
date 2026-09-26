@@ -48,8 +48,10 @@ const float min_log_luminance = log2(min_luminance);
 const float max_log_luminance = log2(max_luminance);
 
 #ifdef MANUAL_EXPOSURE_USE_SCREEN_BRIGHTNESS
+// Brightness slider at 0 = Maximum Exposure (darkest), at 1 = Minimum Exposure
+// (brightest), matching the meaning of the EV values used by auto exposure
 float manual_exposure_value
-    = mix(min_luminance, max_luminance, screenBrightness);
+    = mix(AUTO_EXPOSURE_MAX, AUTO_EXPOSURE_MIN, screenBrightness);
 #else
 const float manual_exposure_value = MANUAL_EXPOSURE_VALUE;
 #endif

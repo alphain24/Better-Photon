@@ -248,7 +248,10 @@ vec4 get_clouds_and_aurora(
 
     // Aurora
 
-    vec3 aurora = draw_aurora(ray_dir, dither);
+    // Skip the aurora where it is completely hidden behind clouds
+    vec3 aurora = result.transmittance > 0.01
+        ? draw_aurora(ray_dir, dither)
+        : vec3(0.0);
 
     vec4 clouds_and_aurora = vec4(
         result.scattering.xyz + aurora * result.transmittance,
