@@ -243,6 +243,17 @@ void main() {
 
     // Aurora
 
-    clouds.xyz += draw_aurora(ray_dir, dither) * clouds.w;
+    float aurora_distance;
+    vec3 aurora
+        = draw_aurora(ray_dir, dither, distance_to_terrain, aurora_distance);
+    clouds.xyz += aurora * clouds.w;
+
+    // Let visible aurora in front of the clouds/terrain set the apparent
+    // distance, so that it is drawn in front of terrain when the viewer is
+    // flying through it and is reprojected correctly when moving
+    if (max_of(aurora * clouds.w) > 1e-3) {
+        clouds_data.x
+            = min(clouds_data.x, aurora_distance * rcp(CLOUDS_SCALE));
+    }
 #endif
 }
