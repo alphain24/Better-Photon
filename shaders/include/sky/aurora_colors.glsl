@@ -3,61 +3,27 @@
 
 #include "/include/utility/random.glsl"
 
-// [0] - bottom color
-// [1] - top color
+// [0] - bottom color (base of the curtains)
+// [1] - top color (upper rays)
+// All palettes stay close to the colors of real auroras: the green oxygen
+// emission at the base of the curtains, fading to cyan and blue higher up
 mat2x3 get_aurora_colors() {
     const mat2x3[] aurora_colors = mat2x3[](
         mat2x3(
-            vec3(0.00, 1.00, 0.25), // green
-            vec3(0.50, 0.70, 1.00) // blue
+            vec3(0.05, 1.00, 0.40), // emerald green
+            vec3(0.15, 0.55, 1.00) // blue
         ),
         mat2x3(
-            vec3(0.00, 1.00, 0.25), // green
-            vec3(0.50, 0.70, 1.00) // blue
+            vec3(0.10, 1.00, 0.30), // green
+            vec3(0.00, 0.85, 1.00) // cyan
         ),
         mat2x3(
-            vec3(1.00, 0.00, 0.00), // red
-            vec3(1.00, 0.50, 0.70) // purple
+            vec3(0.00, 1.00, 0.60), // teal
+            vec3(0.10, 0.35, 1.00) // deep blue
         ),
         mat2x3(
-            vec3(1.00, 0.25, 1.00), // magenta
-            vec3(0.25, 0.25, 1.00) // deep blue
-        ),
-        mat2x3(
-            vec3(1.00, 0.50, 1.00), // purple
-            vec3(0.50, 0.70, 1.00) // blue
-        ),
-        mat2x3(
-            vec3(1.00, 0.50, 1.00), // purple
-            vec3(0.50, 0.70, 1.00) // blue
-        ),
-        mat2x3(
-            vec3(1.00, 0.10, 0.00), // red
-            vec3(1.00, 1.00, 0.25) // yellow
-        ),
-        mat2x3(
-            vec3(1.00, 1.00, 1.00), // white
-            vec3(1.00, 0.00, 0.00) // red
-        ),
-        mat2x3(
-            vec3(1.00, 1.00, 0.00), // yellow
-            vec3(0.10, 0.50, 1.00) // blue
-        ),
-        mat2x3(
-            vec3(1.00, 0.25, 1.00), // magenta
-            vec3(0.00, 1.00, 0.25) // green
-        ),
-        mat2x3(
-            vec3(1.00, 0.70, 1.00) * 1.2, // pink
-            vec3(0.90, 0.30, 0.90) // purple
-        ),
-        mat2x3(
-            vec3(0.00, 1.00, 0.25), // green
-            vec3(0.90, 0.30, 0.90) // purple
-        ),
-        mat2x3(
-            vec3(2.00, 0.80, 0.00), // orange
-            vec3(1.00, 0.50, 0.00) // orange
+            vec3(0.00, 0.95, 0.75), // cyan-green
+            vec3(0.25, 0.45, 1.00) // blue
         )
     );
 
